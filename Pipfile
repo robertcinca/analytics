@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+black = "*"
+flake8 = "*"
+ipython = "*"
+isort = "*"
+jupyter = "*"
+jupyterlab_server = "*"
+jupyterlab = "*"
+kedro = "*"
+kedro-datasets = "*"
+kedro-telemetry = "*"
+kedro-viz = "*"
+nbstripout = "*"
+pytest-cov = "*"
+pytest-mock = "*"
+pytest = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
