@@ -25,7 +25,7 @@
 #
 # application_record_database:
 #  type: pandas.SQLTableDataSet
-#  # credentials: scooters_credentials
+#  credentials: scooters_credentials
 #  table_name: application_record
 #  # load_args:
 #  #   index_col: ['name']
@@ -37,7 +37,7 @@
 
 # credit_record_database:
 #  type: pandas.SQLTableDataSet
-#  # credentials: scooters_credentials
+#  credentials: scooters_credentials
 #  table_name: credit_record
 #  # load_args:
 #  #   index_col: ['name']
@@ -46,7 +46,7 @@
 #  #   if_exists: 'replace'
 #    # if_exists: 'fail'
 #    # if_exists: 'append'
-# #
+#
 # The Data Catalog supports being able to reference the same file using two different DataSet implementations
 # (transcoding), templating and a way to reuse arguments that are frequently repeated. See more here:
 # https://kedro.readthedocs.io/en/stable/data/data_catalog.html
@@ -67,7 +67,12 @@ credit_record_csv:
   type: pandas.CSVDataSet
   filepath: data/01_raw/credit_record.csv
 
-preprocessed_records:
+merged_record:
   type: pandas.ParquetDataSet
-  filepath: data/02_intermediate/merged_records.pq
+  filepath: data/02_intermediate/merged_record.pq
+
+converted_record:
+  type: pandas.ParquetDataSet
+  filepath: data/03_primary/converted_record.pq
+
 
