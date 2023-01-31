@@ -5,12 +5,18 @@ generated using Kedro 0.18.4
 
 from kedro.pipeline import Pipeline, node, pipeline
 
-from .nodes import make_predictions, report_accuracy, split_data
+from .nodes import make_predictions, merge_data, report_accuracy, split_data
 
 
 def create_pipeline(**kwargs) -> Pipeline:
     return pipeline(
         [
+            node(
+                func=merge_data,
+                inputs=["application_record_csv", "credit_record_csv"],
+                outputs="preprocessed_records",
+                name="merge",
+            ),
             node(
                 func=split_data,
                 inputs=["example_iris_data", "parameters"],

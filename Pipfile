@@ -4,21 +4,22 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-black = "*"
-flake8 = "*"
-ipython = "*"
-isort = "*"
-jupyter = "*"
+black = "~=22.0"
+flake8 = "<4.0,>=3.7.9"
+ipython = "<8.0,>=7.31.1"
+isort = "~=5.0"
+jupyter = "~=1.0"
 jupyterlab_server = "*"
-jupyterlab = "*"
-kedro = "*"
-kedro-datasets = "*"
-kedro-telemetry = "*"
+jupyterlab = "~=3.0"
+kedro = {version = "==0.18.4", extras = ["pandas.csvdataset", "pandas.exceldataset", "pandas.parquetdataset"]}
+kedro-datasets = "~=1.0.0"
+kedro-telemetry = "~=0.2.0"
 kedro-viz = "*"
-nbstripout = "*"
-pytest-cov = "*"
-pytest-mock = "*"
-pytest = "*"
+nbstripout = "~=0.4"
+pytest-cov = "~=3.0"
+pytest-mock = "<2.0,>=1.7.1"
+pytest = "~=6.2"
+scikit-learn = "~=1.0"
 
 [dev-packages]
 

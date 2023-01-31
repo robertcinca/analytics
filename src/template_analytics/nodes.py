@@ -10,6 +10,10 @@ import numpy as np
 import pandas as pd
 
 
+def merge_data(data: pd.DataFrame, data_2: pd.DataFrame) -> pd.DataFrame:
+    return data.merge(data_2, on="ID")
+
+
 def split_data(
     data: pd.DataFrame, parameters: Dict[str, Any]
 ) -> Tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:

@@ -5,7 +5,7 @@ isort~=5.0
 jupyter~=1.0
 jupyterlab_server
 jupyterlab~=3.0
-kedro~=0.18.4
+kedro[pandas.CSVDataSet, pandas.ExcelDataSet, pandas.ParquetDataSet]==0.18.4
 kedro-viz
 kedro-datasets~=1.0.0
 kedro-telemetry~=0.2.0
@@ -13,3 +13,4 @@ nbstripout~=0.4
 pytest-cov~=3.0
 pytest-mock>=1.7.1, <2.0
 pytest~=6.2
+scikit-learn~=1.0
