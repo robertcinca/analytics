@@ -32,8 +32,10 @@ merged_record:
 model:
   type: pickle.PickleDataSet
   filepath: data/06_models/model.pkl
+  versioned: True
 
 # Store model metrics (e.g., accuracy) as JSON
 metrics:
   type: tracking.MetricsDataSet
   filepath: data/09_tracking/metrics.json
+  versioned: True

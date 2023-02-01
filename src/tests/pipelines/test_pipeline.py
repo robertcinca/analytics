@@ -44,7 +44,7 @@ class TestPipeline:
         X_test = sample_row.drop(columns="CODE_GENDER")
         y_test = sample_row["CODE_GENDER"]
 
-        model = pd.read_pickle("data/06_models/model.pkl")
+        model = pd.read_pickle("data/06_models/model.pkl/2023-02-01T01.33.28.609Z/model.pkl")
 
         assert TestPipeline.prediction(MlNodes.make_predictions(model, X_test)) is True
 
