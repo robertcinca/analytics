@@ -1,5 +1,18 @@
-# Check which to keep
-
+# Common ID Column across datasets
+id_column: ID
+# Train test split
 train_fraction: 0.8
+# For reproducibility
 random_state: 3
-target_column: species
+# Output Column
+target_column: CODE_GENDER
+# Number of trees in random forest
+n_estimators: [20]
+# Number of features to consider at every split
+max_features: ["sqrt"]
+# Maximum number of levels in tree
+max_depth: [10]
+# Minimum number of samples required to split a node
+min_samples_split: [10]
+# Minimum number of samples required at each leaf node
+min_samples_leaf: [4]

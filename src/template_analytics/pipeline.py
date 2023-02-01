@@ -1,12 +1,6 @@
-"""
-This is a boilerplate pipeline
-generated using Kedro 0.18.4
-"""
-
 from kedro.pipeline import Pipeline, node, pipeline
 
-# from .nodes import make_predictions, merge_data, report_accuracy, split_data,
-from .nodes import DataNodes
+from .nodes import DataNodes, MlNodes
 
 
 def create_pipeline(**kwargs) -> Pipeline:
@@ -14,32 +8,32 @@ def create_pipeline(**kwargs) -> Pipeline:
         [
             node(
                 func=DataNodes.merge_data,
-                inputs=["application_record_csv", "credit_record_csv"],
+                inputs=["parameters", "application_record", "credit_record"],
                 outputs="merged_record",
                 name="merged",
             ),
             node(
-                func=DataNodes.convert_types,
-                inputs="merged_record",
-                outputs="converted_record",
-                name="converted",
-            ),
-            node(
                 func=DataNodes.split_data,
-                inputs=["example_iris_data", "parameters"],
+                inputs=["merged_record", "parameters"],
                 outputs=["X_train", "X_test", "y_train", "y_test"],
                 name="split",
             ),
             node(
-                func=DataNodes.make_predictions,
-                inputs=["X_train", "X_test", "y_train"],
+                func=MlNodes.random_forest_classifier,
+                inputs=["X_train", "y_train", "parameters"],
+                outputs="model",
+                name="ml_model",
+            ),
+            node(
+                func=MlNodes.make_predictions,
+                inputs=["model", "X_test"],
                 outputs="y_pred",
                 name="make_predictions",
             ),
             node(
-                func=DataNodes.report_accuracy,
+                func=MlNodes.report_accuracy,
                 inputs=["y_pred", "y_test"],
-                outputs=None,
+                outputs="metrics",
                 name="report_accuracy",
             ),
         ]

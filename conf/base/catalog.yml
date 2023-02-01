@@ -1,78 +1,39 @@
-# Here you can define all your data sets by using simple YAML syntax.
-#
-# Documentation for this file format can be found in "The Data Catalog"
-# Link: https://kedro.readthedocs.io/en/stable/data/data_catalog.html
-#
-# We support interacting with a variety of data stores including local file systems, cloud, network and HDFS
-#
-# An example data set definition can look as follows:
-#
-#bikes:
-#  type: pandas.CSVDataSet
-#  filepath: "data/01_raw/bikes.csv"
-#
-#weather:
-#  type: spark.SparkDataSet
-#  filepath: s3a://your_bucket/data/01_raw/weather*
-#  file_format: csv
-#  credentials: dev_s3
-#  load_args:
-#    header: True
-#    inferSchema: True
-#  save_args:
-#    sep: '|'
-#    header: True
-#
-# application_record_database:
-#  type: pandas.SQLTableDataSet
-#  credentials: scooters_credentials
-#  table_name: application_record
-#  # load_args:
-#  #   index_col: ['name']
-#  #   columns: ['name', 'gear']
-#  # save_args:
-#  #   if_exists: 'replace'
-#    # if_exists: 'fail'
-#    # if_exists: 'append'
+#  Read from Database
 
-# credit_record_database:
-#  type: pandas.SQLTableDataSet
-#  credentials: scooters_credentials
-#  table_name: credit_record
-#  # load_args:
-#  #   index_col: ['name']
-#  #   columns: ['name', 'gear']
-#  # save_args:
-#  #   if_exists: 'replace'
-#    # if_exists: 'fail'
-#    # if_exists: 'append'
-#
-# The Data Catalog supports being able to reference the same file using two different DataSet implementations
-# (transcoding), templating and a way to reuse arguments that are frequently repeated. See more here:
-# https://kedro.readthedocs.io/en/stable/data/data_catalog.html
-#
-# This is a data set used by the "Hello World" example pipeline provided with the project
-# template. Please feel free to remove it once you remove the example pipeline.
+application_record:
+  type: pandas.SQLQueryDataSet
+  credentials: sqlite_credentials
+  sql: select * from application_record
 
-example_iris_data:
-  type: pandas.CSVDataSet
-  filepath: data/01_raw/iris.csv
+credit_record:
+  type: pandas.SQLQueryDataSet
+  credentials: sqlite_credentials
+  sql: select * from credit_record
+
+# Read from CSV 
+
+# application_record:
+#   type: pandas.CSVDataSet
+#   filepath: data/01_raw/application_record.csv
+
+# credit_record:
+#   type: pandas.CSVDataSet
+#   filepath: data/01_raw/credit_record.csv
 
 
-application_record_csv:
-  type: pandas.CSVDataSet
-  filepath: data/01_raw/application_record.csv
+### Definitions below are provided with the template ###
 
-credit_record_csv:
-  type: pandas.CSVDataSet
-  filepath: data/01_raw/credit_record.csv
-
+# Store an intermediate version of the dataset as a parquet file
 merged_record:
   type: pandas.ParquetDataSet
   filepath: data/02_intermediate/merged_record.pq
 
-converted_record:
-  type: pandas.ParquetDataSet
-  filepath: data/03_primary/converted_record.pq
+# Store ML model as pickle file
+model:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/model.pkl
 
-
+# Store model metrics (e.g., accuracy) as JSON
+metrics:
+  type: tracking.MetricsDataSet
+  filepath: data/09_tracking/metrics.json
